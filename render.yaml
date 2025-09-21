@@ -11,7 +11,4 @@ services:
         value: production
       - key: SECRET_KEY
         generateValue: true
-      # Add your real API key in the Render dashboard (safer), or put here if you must:
-      # - key: OPENWEATHER_API_KEY
-      #   value: your-real-key
     healthCheckPath: /health
