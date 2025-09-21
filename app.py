@@ -9,12 +9,12 @@ def create_app():
     API_KEY = os.environ.get("OPENWEATHER_API_KEY", "")
 
     def build_params(location: str):
-        """Build OpenWeather params, defaulting ZIP to US if no country provided."""
-        if location.isdigit():
-            zip_param = location if "," in location else f"{location},US"
+        loc = (location or "").strip()
+        if loc.isdigit():
+            zip_param = loc if "," in loc else f"{loc},US"
             return {"zip": zip_param, "appid": API_KEY, "units": "imperial"}
-        else:
-            return {"q": location, "appid": API_KEY, "units": "imperial"}
+        return {"q": loc, "appid": API_KEY, "units": "imperial"}
+
 
     def get_weather_and_forecast(location: str):
         if not API_KEY:
