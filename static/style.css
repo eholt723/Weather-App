@@ -1,1 +1,143 @@
 
+/* ===== Weather Demo — style.css ===== */
+
+/* Light theme tokens */
+:root {
+  --bg: #f8f9fa;           /* page background */
+  --card: #ffffff;         /* card background */
+  --ink: #212529;          /* body text */
+  --muted: #6c757d;        /* secondary text */
+  --brand: #0d6efd;        /* primary */
+  --ok: #198754;           /* success */
+  --warn: #ffc107;         /* warning */
+  --err: #dc3545;          /* danger */
+  --ring: rgba(13, 110, 253, 0.25); /* focus ring */
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Optional dark mode (auto) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --card: #151821;
+    --ink: #e9ecef;
+    --muted: #a0a6b0;
+    --brand: #6ea8fe;
+    --ok: #63d19e;
+    --warn: #ffd761;
+    --err: #ff8787;
+    --ring: rgba(110, 168, 254, 0.3);
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Page + typography tweaks */
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.navbar {
+  backdrop-filter: saturate(120%) blur(6px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+
+.container {
+  max-width: 920px;
+}
+
+/* Card polish */
+.card {
+  border: none;
+  border-radius: 1rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.card .card-body {
+  padding: clamp(1rem, 2vw + .5rem, 1.5rem);
+}
+
+/* Forms */
+.form-label {
+  font-weight: 600;
+}
+
+.form-control, .form-select {
+  border-radius: .75rem;
+  border-color: rgba(0,0,0,.08);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 .25rem var(--ring);
+}
+
+.btn-primary {
+  border-radius: .75rem;
+}
+
+/* Status line (messages under form) */
+#status {
+  min-height: 1.25rem;
+  color: var(--muted);
+}
+
+#status.ok { color: var(--ok); }
+#status.warn { color: var(--warn); }
+#status.err { color: var(--err); }
+
+/* Chart canvas */
+#tempChart {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;            /* Chart.js will control the internal height */
+  margin-top: .5rem;
+}
+
+/* History chips */
+#history {
+  gap: .5rem;
+}
+
+#history .btn {
+  border-radius: 999px;
+  padding: .35rem .75rem;
+  line-height: 1;
+}
+
+/* Utilities */
+.hr-soft {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0,0,0,.08),
+    transparent
+  );
+  margin: 1rem 0;
+}
+
+/* Subtle link style */
+a:not(.btn) {
+  text-underline-offset: 3px;
+}
+
+/* Smooth fade-in for content */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card { animation: fadeInUp .28s ease-out both; }
+
+/* Small screens */
+@media (max-width: 576px) {
+  .navbar .container,
+  main.container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
