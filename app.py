@@ -15,7 +15,7 @@ def create_app():
     def get_weather_and_forecast(location, api_key):
         base_url = "https://api.openweathermap.org/data/2.5/weather"
         if location.isdigit():
-            params = {"zip": location, "appid": api_key, "units": "imperial"}
+            params = {"zip": f"{location},US", "appid": api_key, "units": "imperial"}
         else:
             params = {"q": location, "appid": api_key, "units": "imperial"}
         try:
