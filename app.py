@@ -1,4 +1,4 @@
-# app.py — Flask + OpenWeather (Render-ready) with /health and /diag
+
 from flask import Flask, render_template, request
 import os, requests
 from collections import defaultdict
@@ -12,7 +12,7 @@ def create_app():
     def build_params(location: str):
         loc = (location or "").strip()
         if loc.isdigit():
-            # Force country for ZIP lookups unless user typed one
+            # Force country for ZIP 
             zip_param = loc if "," in loc else f"{loc},US"
             return {"zip": zip_param, "appid": API_KEY, "units": "imperial"}
         return {"q": loc, "appid": API_KEY, "units": "imperial"}
@@ -72,9 +72,8 @@ def create_app():
     @app.get("/diag")
     def diag():
         """Calls OpenWeather with a known ZIP to help debug 401s."""
-        test_loc = "75040"  # change if you want
+        test_loc = "75040"  
         params = build_params(test_loc)
-        # Mask appid before echoing
         masked_key = f"{API_KEY[:4]}...{API_KEY[-4:]}" if API_KEY else ""
         safe_params = {**params, "appid": masked_key}
         try:
@@ -106,7 +105,7 @@ def create_app():
 
     return app
 
-# Gunicorn entrypoint
+
 app = create_app()
 
 if __name__ == "__main__":
